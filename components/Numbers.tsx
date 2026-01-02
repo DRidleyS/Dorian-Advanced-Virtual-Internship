@@ -1,4 +1,3 @@
-import BsStarFill from "./BsStarFill";
 import BsStarHalf from "./BsStarHalf";
 
 const Numbers = () => {
