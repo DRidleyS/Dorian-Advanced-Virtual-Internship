@@ -1,5 +1,3 @@
-import React from "react";
-
 const BsStarHalf = () => {
   return (
     <div className="numbers__icon numbers__star--icon">
