@@ -4,6 +4,7 @@ import "./globals.css";
 import { Roboto } from "next/font/google";
 import ReduxProvider from "@/components/ReduxProvider";
 import FirebaseAuthProvider from "@/components/FirebaseAuthProvider";
+import AuthModal from "@/components/AuthModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
       >
         <ReduxProvider>
           <FirebaseAuthProvider>{children}</FirebaseAuthProvider>
+          <AuthModal />
         </ReduxProvider>
       </body>
     </html>

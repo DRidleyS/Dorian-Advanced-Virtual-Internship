@@ -1,7 +1,6 @@
 "use client";
 import { useAppDispatch } from "@/store/hooks";
 import { openAuth } from "@/store/uiSlice";
-import AuthModal from "./AuthModal";
 
 const Landing = () => {
   const dispatch = useAppDispatch();
@@ -35,7 +34,6 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <AuthModal />
     </section>
   );
 };
