@@ -19,11 +19,31 @@ const AuthModalContent = ({ onClose }: { onClose: () => void }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  const isValidPassword = (pwd: string) => {
+    const minLength = 8;
+    if (pwd.length < minLength) {
+      return false;
+    }
+    // Require at least one letter and one number
+    const complexityRegex = /^(?=.*[A-Za-z])(?=.*\d).+$/;
+    return complexityRegex.test(pwd);
+  };
+
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isSignup && password !== confirmPassword) {
-      dispatch(setError("Passwords do not match"));
-      return;
+    if (isSignup) {
+      if (!isValidPassword(password)) {
+        dispatch(
+          setError(
+            "Password must be at least 8 characters long and include both letters and numbers."
+          )
+        );
+        return;
+      }
+      if (password !== confirmPassword) {
+        dispatch(setError("Passwords do not match"));
+        return;
+      }
     }
     setIsLoadingEmail(true);
     try {
@@ -107,7 +127,7 @@ const AuthModalContent = ({ onClose }: { onClose: () => void }) => {
               background: "transparent",
             }}
           >
-            x
+            ×
           </button>
           <h2 className="auth__title">Are you a Summarist?</h2>
 
@@ -246,6 +266,7 @@ const AuthModalContent = ({ onClose }: { onClose: () => void }) => {
                 className="auth__main--input"
                 type="email"
                 placeholder="Email Address"
+                aria-label="Email Address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -254,6 +275,7 @@ const AuthModalContent = ({ onClose }: { onClose: () => void }) => {
                 className="auth__main--input"
                 type="password"
                 placeholder="Password"
+                aria-label="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -263,10 +285,12 @@ const AuthModalContent = ({ onClose }: { onClose: () => void }) => {
                   className="auth__main--input"
                   type="password"
                   placeholder="Confirm Password"
+                  aria-label="Confirm Password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                 />
+              )}
               )}
               <button className="btn" type="submit" disabled={isLoadingEmail}>
                 {isLoadingEmail
