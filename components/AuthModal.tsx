@@ -55,7 +55,9 @@ const AuthModalContent = ({ onClose }: { onClose: () => void }) => {
       onClose();
       router.push("/for-you");
     } catch (err: any) {
-      console.error("Email auth error:", err);
+      if (process.env.NODE_ENV === "development") {
+        console.error("Email auth error:", err);
+      }
       dispatch(setError(err?.code ?? err?.message ?? "Auth failed"));
     } finally {
       setIsLoadingEmail(false);
