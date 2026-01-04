@@ -127,7 +127,7 @@ const AuthModalContent = ({ onClose }: { onClose: () => void }) => {
               background: "transparent",
             }}
           >
-            x
+            ×
           </button>
           <h2 className="auth__title">Are you a Summarist?</h2>
 
