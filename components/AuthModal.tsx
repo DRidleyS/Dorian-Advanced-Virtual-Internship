@@ -291,7 +291,6 @@ const AuthModalContent = ({ onClose }: { onClose: () => void }) => {
                   required
                 />
               )}
-              )}
               <button className="btn" type="submit" disabled={isLoadingEmail}>
                 {isLoadingEmail
                   ? "Working…"
