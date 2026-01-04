@@ -1,4 +1,10 @@
+"use client";
+import { useAppDispatch } from "@/store/hooks";
+import { openAuth } from "@/store/uiSlice";
+import AuthModal from "./AuthModal";
+
 const Landing = () => {
+  const dispatch = useAppDispatch();
   return (
     <section id="landing">
       <div className="container">
@@ -16,7 +22,12 @@ const Landing = () => {
                 <br className="remove--tablet" />
                 and even people who don’t like to read.
               </div>
-              <button className="btn home__cta--btn">Login</button>
+              <button
+                className="btn home__cta--btn"
+                onClick={() => dispatch(openAuth())}
+              >
+                Login
+              </button>
             </div>
             <figure className="landing__image--mask">
               <img src="/summaristlandingimg.png" alt="landing" />
@@ -24,6 +35,7 @@ const Landing = () => {
           </div>
         </div>
       </div>
+      <AuthModal />
     </section>
   );
 };
