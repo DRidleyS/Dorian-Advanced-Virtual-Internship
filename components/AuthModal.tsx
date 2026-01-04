@@ -19,11 +19,31 @@ const AuthModalContent = ({ onClose }: { onClose: () => void }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  const isValidPassword = (pwd: string) => {
+    const minLength = 8;
+    if (pwd.length < minLength) {
+      return false;
+    }
+    // Require at least one letter and one number
+    const complexityRegex = /^(?=.*[A-Za-z])(?=.*\d).+$/;
+    return complexityRegex.test(pwd);
+  };
+
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isSignup && password !== confirmPassword) {
-      dispatch(setError("Passwords do not match"));
-      return;
+    if (isSignup) {
+      if (!isValidPassword(password)) {
+        dispatch(
+          setError(
+            "Password must be at least 8 characters long and include both letters and numbers."
+          )
+        );
+        return;
+      }
+      if (password !== confirmPassword) {
+        dispatch(setError("Passwords do not match"));
+        return;
+      }
     }
     setIsLoadingEmail(true);
     try {
