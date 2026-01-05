@@ -34,7 +34,7 @@ const BookComponent = ({ book }: BookProps) => {
         <img
           className="book__image"
           src={book.imageLink}
-          alt="book"
+          alt={`${book.title} cover`}
           style={{
             width: "100%",
             height: "100%",
